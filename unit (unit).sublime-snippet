@@ -1,0 +1,30 @@
+<snippet>
+    <content><![CDATA[
+unit u${1:class_name};
+
+interface
+
+uses
+	SysUtils, Classes${2:};
+
+type
+	T${1:unit_name} = class${3:}
+	private
+		{private declarations}
+	protected
+		{protected declarations}
+	public
+		{public declarations}
+	published
+		{published declarations}
+	end;
+
+implementation
+
+end.
+
+]]></content>
+	<description>unit … implementation … end</description>
+    <tabTrigger>unit</tabTrigger>
+    <scope>source.delphi</scope> 
+</snippet>

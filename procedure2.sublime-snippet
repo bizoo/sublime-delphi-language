@@ -1,0 +1,8 @@
+<snippet>
+    <content><![CDATA[
+procedure ${1:myrecord}($2);
+]]></content>
+	<description>procedure ()</description>
+    <tabTrigger>procedure</tabTrigger>
+    <scope>source.delphi</scope>
+</snippet>

@@ -1,0 +1,11 @@
+<snippet>
+    <content><![CDATA[
+while not ${1}.EOF do
+begin
+	${1}.Next;
+end;
+]]></content>
+	<description>while EOF</description>
+    <tabTrigger>while</tabTrigger>
+    <scope>source.delphi</scope> 
+</snippet>

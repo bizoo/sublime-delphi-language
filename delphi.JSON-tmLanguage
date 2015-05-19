@@ -1,0 +1,213 @@
+{    
+    "name": "Delphi",
+    "scopeName": "source.delphi",
+    "fileTypes": [
+        "pas",
+        "dpr",
+        "dfm",
+        "dpk"
+    ],
+    "repository": {
+        "general": {
+            "patterns": [
+                {
+                    "name": "comment.line.double-slash.delphi",
+                    "match": "(//).*$\\n?",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.comment.delphi"
+                        }
+                    }
+                },
+                {   
+                    "captures": {
+                        "0": {
+                            "name": "punctuation.definition.comment.delphi"
+                        }
+                    },
+                    "begin": "\\(\\*",
+                    "end": "\\*\\)",
+                    "name": "comment.block.delphi.one"
+                },
+                {
+                    "captures": {
+                        "0": {
+                            "name": "punctuation.definition.comment.delphi"
+                        }
+                    },
+                    "begin": "\\{",
+                    "end": "\\}",
+                    "name": "comment.block.delphi.two"
+                },
+                {
+                    "begin": "^\\s*(class procedure|class function|property|function|Function|procedure|Procedure|program|constructor|destructor)\\s+(?=[A-Za-z_][A-Za-z0-9_]*)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.type.function.delphi"
+                        }
+                    },
+                    "end": "(\\:|\\;)",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.section.function.begin.delphi"
+                        }
+                    },
+                    "name": "meta.function.delphi",
+                    "patterns": [
+                        {
+                            "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
+                            "contentName": "entity.name.function.delphi",
+                            "end": "(?![A-Za-z0-9_])",
+                            "patterns": [
+                                {
+                                    "include": "#entity_name_function"
+                                }
+                            ]
+                        },
+                        {
+                            "begin": "(\\()",
+                            "beginCaptures": {
+                                "1": {
+                                    "name": "punctuation.definition.parameters.begin.delphi"
+                                }
+                            },
+                            "contentName": "meta.function.parameters.delphi",
+                            "end": "(?=\\)|\\;\\s*(?:\\;|-\\>))",
+                            "patterns": [
+                                {
+                                    "captures": {
+                                        "1": {
+                                            "name": "variable.parameter.function.delphi"
+                                        },
+                                        "2": {
+                                            "name": "punctuation.separator.parameters.delphi"
+                                        }
+                                    },
+                                    "match": "\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(:|,)|(?=[\\n]))"
+                                }
+                            ]
+                        },
+                        {
+                            "begin": "(\\:)\\s*(\\->)",
+                            "beginCaptures": {
+                                "1": {
+                                    "name": "punctuation.definition.parameters.end.delphi"
+                                },
+                                "2": {
+                                    "name": "punctuation.separator.annotation.result.delphi"
+                                }
+                            },
+                            "end": "(\\;)",
+                            "patterns": [
+                                {
+                                    "include": "$self"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "begin": "^\\s*(property|function|Function|procedure|Procedure|program|constructor|destructor)\\s+(?=[A-Za-z_][A-Za-z0-9_]*)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.type.function.delphi"
+                        }
+                    },
+                    "end": "(\\()|\\;|\\:\\s*",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.parameters.begin.delphi"
+                        },
+                        "2": {
+                            "name": "invalid.illegal.missing-parameters.delphi"
+                        }
+                    },
+                    "name": "meta.function.delphi",
+                    "patterns": [
+                        {
+                            "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
+                            "contentName": "entity.name.function.delphi",
+                            "end": "(?![A-Za-z0-9_])",
+                            "patterns": [
+                                {
+                                    "include": "#entity_name_function"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "string.quoted.single.delphi",
+                    "match": "#(\\d{1,2}|.)"
+                },
+                {
+                    "name": "constant.numeric.delphi",
+                    "match": "(?<![\\d.])\\s0x[a-fA-F\\d]+|\\b\\d+(\\.\\d+)?([eE]-?\\d+)?|\\.\\d+([eE]-?\\d+)?"
+                },
+                {
+                    "name": "constant.language.delphi",
+                    "match": "@|nil|true|True|false|False"
+                },
+                {
+                    "name": "string.quoted.single.delphi",
+                    "begin": "'",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.begin.delphi"
+                        }
+                    },
+                    "end": "'",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.end.delphi"
+                        }
+                    }
+                },
+                {
+                    "name": "string.quoted.block.delphi",
+                    "begin": "\\[(=*)\\[",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.begin.delphi"
+                        }
+                    },
+                    "end": "\\]\\1\\]",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.end.delphi"
+                        }
+                    }
+                },
+                {
+                    "name": "meta.arrayindex.delphi",
+                    "begin": "\\[",
+                    "end": "\\]",
+                    "patterns": [
+                        {
+                            "include": "#general"
+                        }
+                    ]
+                },
+                {
+                    "name": "keyword.operator.delphi",
+                    "match": "(\\b(and|or|not)\\b)"
+                },
+                {
+                    "name": "keyword.control.delphi",
+                    "match": "\\b(?i:(exports|e?|(message?)|library|set|array|file|mod|shl|as|shr|asm|for|begin|object|then|case|goto|of|to|class|if|on|try|const|implementation|type|constructor|in|packed|unit|destructor|inherited|until|div|initialization|program|uses|do|inline|property|var|downto|interface|raise|while|else|is|record|with|end|label|repeat|xor|except|absolute|export|published|abstract|external|near|read|assembler|far|nodefault|resident|at|forward|override|stored|cdecl|index|private|virtual|default|interrupt|protected|write|dynamic|public|ab|length|ord|size|of|chr|lo|pred|succ|hi|low|ptr|swap|high|odd|round|trunc|threadvar|overload|out|finalization|finally|break|return|local|final|unsafe|resourcestring|sealed|dispinterface|static|platform|requires|safecall|automated|stdcall|contains|implements|varargs|readonly|deprecated|package|register|dispid|pascal|reintroduce|writeonly))\\b"
+
+                },
+                {
+                    "name": "variable.other.delphi",
+                    "match": "([A-Za-z_][A-Za-z0-9_\\.]*)"
+                }
+            ]
+        }
+    },
+    "patterns": [
+        {
+            "include": "#general"
+        }
+    ],
+    "uuid": "38ec920b-4e04-4fc1-b21b-dd9b6a543647"
+}
