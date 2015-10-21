@@ -235,7 +235,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>@|nil|true|True|false|False</string>
+					<string>\b(?i:(@|nil|true|True|false|False))\b</string>
 					<key>name</key>
 					<string>constant.language.delphi</string>
 				</dict>
