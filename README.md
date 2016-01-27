@@ -6,7 +6,7 @@
 
 (class class_name)
 
-(descendant class_name)
+(descendants class_name)
 
 (called method_name)
 
