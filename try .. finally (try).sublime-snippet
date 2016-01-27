@@ -2,9 +2,9 @@
 <snippet>
     <content><![CDATA[
 try
-
+  $0
 finally
-  FreeAndNil(${1:objeto});
+  FreeAndNil(${1:object});
 end;
 ]]></content>
 	<description>try ... finally</description>

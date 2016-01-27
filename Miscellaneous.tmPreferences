@@ -24,7 +24,7 @@
 			</array>
 		</array>
 		<key>increaseIndentPattern</key>
-		<string>\b(?i:(begin|declare|else|except|exception|finally|for|if|loop|package|procedure|task|try|type|when))\b</string>
+		<string>\b(?i:(begin|declare|if|else|except|finally|for|package|try|type|when|private|protected|public|published|var|const|uses|initialization|finalization))(.*|$)\b</string>
 		<key>shellVariables</key>
 		<array>
 			<dict>
@@ -37,13 +37,13 @@
 				<key>name</key>
 				<string>TM_COMMENT_START_2</string>
 				<key>value</key>
-				<string>/*</string>
+				<string>{</string>
 			</dict>
 			<dict>
 				<key>name</key>
 				<string>TM_COMMENT_END_2</string>
 				<key>value</key>
-				<string>*/</string>
+				<string>}</string>
 			</dict>
 		</array>
 		<key>smartTypingPairs</key>

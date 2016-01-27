@@ -2,6 +2,7 @@
     <content><![CDATA[
 case (${1}) of
 	$0: ${2}
+end;
 ]]></content>
 	<description>case of</description>
     <tabTrigger>case</tabTrigger>

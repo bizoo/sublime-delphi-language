@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Symbol Class Definition List</string>
+	<key>scope</key>
+	<string>entity.name.section</string>
+	<key>settings</key>
+	<dict>
+		<key>showInIndexedSymbolList</key>
+		<integer>1</integer>
+		<key>symbolIndexTransformation</key>
+		<string>
+		   s/([A-Za-z_][A-Za-z0-9_]*)/\(class $1\)/g;
+		</string>
+	</dict>
+	<key>uuid</key>
+	<string>31262BFB-520A-4253-A81C-60023C0CFC8B</string>
+</dict>
+</plist>

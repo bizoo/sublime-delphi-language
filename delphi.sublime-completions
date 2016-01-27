@@ -40,13 +40,9 @@
 		{ "trigger": "array", "contents": "array[$1..$2] of" },		
 
 		{ "trigger": "procedure", "contents": "procedure $1;\nbegin\n\t${2}\nend;" },		
-		{ "trigger": "function", "contents": "function $1($2):$3\nbegin\n\t${1}:=\nend;" },
+		{ "trigger": "function", "contents": "function $1($2):$3;\nbegin\n\tresult :=$4;\nend;" },
 		{ "trigger": "Length", "contents": "Length($1)" },
 		{ "trigger": "Upcase", "contents": "Upcase($1)" },
-		{ "trigger": "with", "contents": "with ($1) do\nbegin\n\t${2}\nend;" },
-
-		{ "trigger": "gotoxy", "contents": "gotoxy($1,$2);" },
-		{ "trigger": "textcolor", "contents": "textcolor($1);" },
-		{ "trigger": "textbackground", "contents": "textbackground($1);" }
+		{ "trigger": "with", "contents": "with ($1) do\nbegin\n\t${2}\nend;" }
 	]
 }

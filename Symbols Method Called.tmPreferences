@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Symbol Called Methods</string>
+	<key>scope</key>
+	<string>calledmethod.delphi</string>
+	<key>settings</key>
+	<dict>
+		<key>showInIndexedSymbolList</key>
+		<integer>1</integer>
+		<key>symbolIndexTransformation</key>
+		<string>
+		   s/\.([A-Za-z_][A-Za-z0-9_]*)(\(|\;)/\(called $1\)/g;
+		</string>
+	</dict>
+	<key>uuid</key>
+	<string>31262BFB-520A-4253-A81C-60023C0CFC8B</string>
+</dict>
+</plist>

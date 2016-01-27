@@ -1,0 +1,10 @@
+## UPDATE ##
+  Everything was changed, all most of the scopes are defined helping the indexing.
+
+  Now will be much easier to find the class definitions, class descendants and called methods, this keys now are indexed, you can find them on GoTo Symbol in Project, just type:
+  (class class_name)
+  (descendant class_name)
+  (called method_name)
+
+## Bug report ##
+  Found a bug? Please let me know, [I found a bug][2]

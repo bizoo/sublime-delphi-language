@@ -7,8 +7,182 @@
         "dfm",
         "dpk"
     ],
+    "patterns": [
+        {
+            "include": "#general"
+        }
+    ],
     "repository": {
-        "general": {
+        "visibility":{
+            "patterns": [
+                {
+                    "contentName": "private.block.delphi",
+                    "begin": "\\b(?i:(strict\\s)?private)\\b",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "keyword.control.begin.delphi"
+                        }
+                    },
+                    "end": "\\b(?i:(?=((strict\\s)?protected|public|published)|end\\;))\\b",
+                    "endCaptures": {
+                        "1": {
+                            "name": "keyword.control.end.delphi"
+                        }
+                    },
+                    "patterns": [
+                        { "include": "#line" },
+                        { "include": "#methoddeclaration" },
+                        { "include": "#property" }
+                    ]
+                },
+                {
+                    "contentName": "protected.block.delphi",
+                    "begin": "\\b(?i:(strict\\s)?protected)\\b",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "keyword.control.begin.delphi"
+                        }
+                    },
+                    "end": "\\b(?i:(?=((strict\\s)?private|public|published)|end\\;))\\b",
+                    "endCaptures": {
+                        "0": {
+                            "name": "keyword.control.end.delphi"
+                        }
+                    },
+                    "patterns": [
+                        { "include": "#line" },
+                        { "include": "#methoddeclaration" },
+                        { "include": "#property" }
+                    ]
+                },
+                {
+                    "contentName": "public.block.delphi",
+                    "begin": "\\b(?i:public)\\b",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "keyword.control.begin.delphi"
+                        }
+                    },
+                    "end": "\\b(?i:(?=((strict\\s)?private|protected|published)|end\\;))\\b",
+                    "endCaptures": {
+                        "0": {
+                            "name": "keyword.control.end.delphi"
+                        }
+                    },
+                    "patterns": [
+                        { "include": "#line" },
+                        { "include": "#methoddeclaration" },
+                        { "include": "#property" }
+                    ]
+                },
+                {
+                    "contentName": "published.block.delphi",
+                    "begin": "\\b(?i:published)\\b",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "keyword.control.begin.delphi"
+                        }
+                    },
+                    "end": "\\b(?i:(?=((strict\\s)?private|protected|public)|end\\;))\\b",
+                    "endCaptures": {
+                        "0": {
+                            "name": "keyword.control.end.delphi"
+                        }
+                    },
+                    "patterns": [
+                        { "include": "#line" },
+                        { "include": "#methoddeclaration" },
+                        { "include": "#property" }
+                    ]
+                }
+            ]
+        },
+        "domain": {
+            "patterns": [
+                {
+                    "contentName": "interface.block.delphi",
+                    "begin": "\\b(?i:interface)\\b",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "keyword.control.begin.delphi"
+                        }
+                    },
+                    "end": "\\b(?i:(?=implementation))\\b",
+                    "endCaptures": {
+                        "0": {
+                            "name": "keyword.control.end.delphi"
+                        }
+                    },
+                    "patterns": [
+                        { "include": "#type" },
+                        { "include": "#uses" },
+                        { "include": "#line" }
+                    ]
+                },
+                {
+                    "contentName": "implementation.block.delphi",
+                    "begin": "\\b(?i:implementation)\\b",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "keyword.control.begin.delphi"
+                        }
+                    },
+                    "end": "(?i:(?=((?m)^end)(\\.$)))",
+                    "endCaptures": {
+                        "1": {
+                            "name": "keyword.control.end.delphi"
+                        }
+                    },
+                    "patterns": [
+                        { "include": "#uses" },
+                        { "include": "#methoddefinition"},
+                        { "include": "#classdefinitionline" },
+                        { "include": "#classdefinition" },
+                        { "include": "#enumerated" },
+                        { "include": "#interfaceline" },
+                        { "include": "#interface" },
+                        {
+                            "contentName": "initialization.block.delphi",
+                            "begin": "\\b(?i:^initialization)\\b",
+                            "beginCaptures": {
+                                "0": {
+                                    "name": "keyword.control.begin.delphi"
+                                }
+                            },
+                            "end": "\\b(?i:(?=(((?m)^end)(?=\\.$))|(?=finalization)))\\b",
+                            "endCaptures": {
+                                "1": {
+                                    "name": "keyword.control.end.delphi"
+                                }
+                            },
+                            "patterns": [
+                                { "include": "#line" }
+                            ]
+                        },
+                        {
+                            "contentName": "finalization.block.delphi",
+                            "begin": "\\b(?i:^finalization)\\b",
+                            "beginCaptures": {
+                                "0": {
+                                    "name": "keyword.control.begin.delphi"
+                                }
+                            },
+                            "end": "\\b(?i:(?=(((?m)^end)(?=\\.$))|(?=initialization)))\\b",
+                            "endCaptures": {
+                                "1": {
+                                    "name": "keyword.control.end.delphi"
+                                }
+                            },
+                            "patterns": [
+                                { "include": "#line" }
+                            ]
+                        },
+                        { "include": "#line" }
+                    ]
+                }
+            ]
+        },
+        "comment": {
             "patterns": [
                 {
                     "name": "comment.line.double-slash.delphi",
@@ -20,47 +194,521 @@
                     }
                 },
                 {   
-                    "captures": {
-                        "0": {
-                            "name": "punctuation.definition.comment.delphi"
-                        }
-                    },
+                    "name": "comment.block.delphi.one",
                     "begin": "\\(\\*",
                     "end": "\\*\\)",
-                    "name": "comment.block.delphi.one"
-                },
-                {
                     "captures": {
                         "0": {
                             "name": "punctuation.definition.comment.delphi"
                         }
-                    },
-                    "begin": "\\{",
-                    "end": "\\}",
-                    "name": "comment.block.delphi.two"
+                    }
                 },
                 {
-                    "begin": "^\\s*(class procedure|class function|property|function|Function|procedure|Procedure|program|constructor|destructor)\\s+(?=[A-Za-z_][A-Za-z0-9_]*)",
+                    "name": "directive.block.delphi",
+                    "begin": "\\{\\$",
+                    "end": "\\}",
+                    "captures": {
+                        "0": {
+                            "name": "punctuation.definition.comment.delphi"
+                        }
+                    }
+                },
+                {
+                    "name": "comment.block.delphi.two",
+                    "begin": "\\{",
+                    "end": "\\}",
+                    "captures": {
+                        "0": {
+                            "name": "punctuation.definition.comment.delphi"
+                        }
+                    }
+                }
+            ]
+        },
+        "string": {
+            "patterns": [
+                {
+                    "name": "string.quoted.other.delphi",
+                    "match": "(\\#\\$[AaBbCcDdEeFf]*)|(#\\d*)"
+                },
+                {
+                    "name": "string.quoted.single.delphi",
+                    "begin": "'",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.begin.delphi"
+                        }
+                    },
+                    "end": "(')|(\n)",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.string.end.delphi"
+                        },
+                        "2": {
+                            "name": "invalid.string.end.delphi"
+                        }
+                    }
+                }
+            ]
+        },
+        "tryfinalyexceptblock": {
+            "patterns": [
+                { 
+                    "name": "tryfinalyexceptblock.block.delphi",
+                    "begin": "(\\W)(?i:try)(?=($|\\W))",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "keyword.control.delphi."
+                        }
+                    },
+                    "end": "\\b(?i:end)(?=\\;?($|\\W))",
+                    "endCaptures": {
+                        "0": {
+                            "name": "keyword.control.delphi."
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "name": "keyword.control.delphi",
+                            "match": "\\b(?i:(finally|except))\\b"
+                        },
+                        { "include": "#tryfinalyexceptblock" },
+                        { "include": "#assembler" },
+                        { "include": "#block" },
+                        { "include": "#case" },
+                        { "include": "#line" }
+                    ]
+                }
+            ]
+        },
+        "block": {
+            "patterns": [
+                {
+                    "name": "definition.block.delphi",
+                    "begin": "\\b(begin)\\b",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "keyword.control.begin.delphi"
+                        }
+                    },
+                    "end": "(\\W|^)(?i:end)(?=\\;?($|\\W))",
+                    "endCaptures": {
+                        "0": {
+                            "name": "keyword.control.end.delphi"
+                        }
+                    },
+                    "patterns": [
+                        { "include": "#tryfinalyexceptblock" },
+                        { "include": "#block" },
+                        { "include": "#assembler" },
+                        { "include": "#case" },
+                        { "include": "#line" }
+                    ]
+                }
+            ]
+        },
+        "assembler":{
+            "patterns": [                
+                {
+                    "name": "assembler.block.delphi",
+                    "begin": "\\b(asm)\\b",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "keyword.control.begin.delphi"
+                        }
+                    },
+                    "end": "(\\s*|^)\\b(?i:end)\\b(?=\\;($|\\s+))",
+                    "endCaptures": {
+                        "0": {
+                            "name": "keyword.control.end.delphi"
+                        }
+                    },
+                    "patterns": [
+                        { "include": "#comment" },
+                        {
+                            "match": "(.*)",
+                            "captures": {
+                                "1": {
+                                    "name": "variable.assembler.delphi"
+                                }
+                            }
+                        }                        
+                    ]
+                }
+            ]
+        },
+        "assembler2":{
+            "patterns": [
+                {
+                    "name": "assembler.block.delphi",
+                    "begin": "\\b(asm)\\b",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "keyword.control.begin.delphi"
+                        }
+                    },
+                    "end": "(\\s*|^)(?=(?i:end;))",
+                    "endCaptures": {
+                        "0": {
+                            "name": "keyword.control.end.delphi"
+                        }
+                    },
+                    "patterns": [
+                        { "include": "#comment" },
+                        {
+                            "match": "(.*)",
+                            "captures": {
+                                "1": {
+                                    "name": "variable.assembler.delphi"
+                                }
+                            }
+                        }                        
+                    ]
+                }
+            ]
+        },
+        "case": {
+            "patterns": [
+                {
+                    "name": "definition.case.block.delphi",
+                    "begin": "\\b(case)\\b",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "keyword.control.begin.delphi"
+                        }
+                    },
+                    "end": "(\\W|^)(?i:end)(?=\\;($|\\W))",
+                    "endCaptures": {
+                        "0": {
+                            "name": "keyword.control.end.delphi"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "name": "keyword.control.delphi",
+                            "match": "\\b(?i:(of))\\b"
+                        },
+                        { "include": "#tryfinalyexceptblock" },
+                        { "include": "#block" },
+                        { "include": "#case" },
+                        { "include": "#line" }
+                    ]
+                }
+            ]
+        },
+        "property": {
+            "patterns": [
+                { 
+                    "name": "meta.property.delphi",
+                    "begin": "^\\s*(?i:(property))\\s+(?=[A-Za-z_][A-Za-z0-9_]*)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "storage.type.property.delphi"
+                        }
+                    },
+                    "end": "(?=(\\:|\\;))",
+                    "patterns": [
+                        {
+                            "begin": "(\\s*)(?=[A-Za-z_][A-Za-z0-9_]*)",
+                            "contentName": "entity.name.property.delphi",
+                            "end": "(?![A-Za-z0-9_])"
+                        },
+                        { "include": "#line" }
+                    ]
+                }
+            ]
+        },
+        "methoddefinition": {
+            "patterns": [
+                {
+                    "name": "function.implementation.delphi",
+                    "begin": "(?=^\\s*(?i:(class procedure|class function|function|procedure|constructor|destructor))\\s+(?=[A-Za-z_][A-Za-z0-9_]*))",
+                    "end": "(^end)(\\;)",
+                    "endCaptures": {
+                        "1": {
+                            "name": "keyword.control.delphi"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "name": "keyword.control.delphi",
+                            "match": "\\b(?i:(begin|end))\\b"
+                        },
+                        { "include": "#methoddeclaration" },
+                        { "include": "#tryfinalyexceptblock" },
+                        { "include": "#case" },
+                        { "include": "#recorddefinition" },
+                        { "include": "#enumerated" },
+                        { "include": "#classdefinition" },
+                        { "include": "#assembler2" },
+                        { "include": "#line" }
+                    ]
+                }
+            ]
+        },
+        "methoddeclaration" :{
+            "patterns": [
+                {
+                    "name": "meta.function.delphi",
+                    "begin": "^\\s*(?i:(class procedure|class function|function|procedure|constructor|destructor))\\s+(?=[A-Za-z_][A-Za-z0-9_]*)",
                     "beginCaptures": {
                         "1": {
                             "name": "storage.type.function.delphi"
                         }
                     },
-                    "end": "(\\:|\\;)",
+                    "end": "(?=(\\;))",
                     "endCaptures": {
                         "1": {
-                            "name": "punctuation.section.function.begin.delphi"
+                            "name": "punctuation.function.end.delphi"
                         }
                     },
-                    "name": "meta.function.delphi",
                     "patterns": [
                         {
-                            "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
+                            "name": "entity.class.name.delphi",
+                            "match": "\\w*(?=\\.)"
+                        },
+                        {
+                            "begin": "(\\.|\\s*)(?=[A-Za-z_][A-Za-z0-9_]*)",
                             "contentName": "entity.name.function.delphi",
-                            "end": "(?![A-Za-z0-9_])",
+                            "end": "(?![A-Za-z0-9_])"
+                        },
+                        {
+                            "name": "return.delphi",
+                            "begin": "(?=\\:\\s*)",
+                            "beginCaptures": {
+                                "1": {
+                                    "name": "punctuation.definition.return.begin.delphi"
+                                }
+                            },
+                            "contentName": "return.type.delphi",
+                            "end": "(?=\\;)",
+                            "endCaptures": {
+                                "1": {
+                                    "name": "punctuation.definition.return.end.delphi"
+                                }
+                            }
+                        },
+                        {
+                            "begin": "(\\()",
+                            "beginCaptures": {
+                                "1": {
+                                    "name": "punctuation.definition.parameters.begin.delphi"
+                                }
+                            },
+                            "contentName": "meta.function.parameters.delphi",
+                            "end": "(?=\\)|\\;\\s*(?:\\;))",
+                            "patterns": [
+                                { "include": "#numeric" },
+                                { "include": "#constant" },
+                                { "include": "#string" },
+                                { "include": "#paramodifer" },
+                                { "include": "#comment" },
+                                {
+                                    "match": "\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?=(:|,)|(?=[\\n]))",
+                                    "captures": {
+                                        "1": {
+                                            "name": "variable.parameter.function.delphi"
+                                        },
+                                        "2": {
+                                            "name": "punctuation.separator.parameters.delphi"
+                                        }
+                                    }
+                                },
+                                {
+                                    "name": "paramtype.delphi",
+                                    "captures": {
+                                        "2": { "name": "storage.type.delphi" }
+                                    },
+                                    "match": "(\\:)\\s+\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?=\\;|\\)|\\s*\\=)"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "classdefinition" : {
+            "patterns": [
+                {
+                    "name": "entity.class.interface.delphi",
+                    "begin": "(\\s+\\w*)(\\s+=\\s+)(?i:((packed\\s)?(class)(\\sof)?))(\\((.*)\\)|)",
+                    "beginCaptures": {
+                                "1": {
+                                    "name": "entity.name.section.delphi"
+                                },
+                                "3": {
+                                    "name": "storage.type.delphi"
+                                },
+                                "8": {
+                                    "name": "entity.other.inherited-class.delphi"
+                                }
+                            },
+                    "end": "(?i:(\\s*end))(\\;$)|(\\)\\;$)|(^\\s*;$)",
+                    "endCaptures": {
+                                "1": {
+                                    "name": "keyword.control.delphi"
+                                }
+                    },
+                    "patterns": [
+                            { "include": "#methoddeclaration" },
+                            { "include": "#visibility" },
+                            { "include": "#line" }
+                    ]
+                }
+            ]
+        },
+        "classdefinitionline": {
+            "patterns": [
+                {
+                    "name": "entity.classline.interface.delphi",
+                    "match": "(\\s+\\w*)(\\s+=\\s+)(?i:((packed\\s)?(class)(\\sof)?))(\\((.*)\\)|)(.*\\;$)",
+                    "captures": {
+                                "1": {
+                                    "name": "entity.name.section.delphi"
+                                },
+                                "3": {
+                                    "name": "storage.type.delphi"
+                                },
+                                "8": {
+                                    "name": "entity.other.inherited-class.delphi"
+                                }
+                    }
+                }            
+            ]
+        },
+        "interface" : {
+            "patterns": [
+                {
+                    "name": "entity.interface.delphi",
+                    "begin": "(\\s+\\w*)(\\s+=\\s+)(?i:(interface|dispinterface))",
+                    "beginCaptures": {
+                                "1": {
+                                    "name": "entity.name.interface.definition.delphi"
+                                },
+                                "3": {
+                                    "name": "keyword.control.delphi"
+                                }
+                            },
+                    "end": "(?i:(\\s*end))(\\;$)",
+                    "endCaptures": {
+                                "1": {
+                                    "name": "keyword.control.delphi"
+                                }
+                    },
+                    "patterns": [
+                            { "include": "#methoddeclaration" },
+                            { "include": "#line" }
+                    ]
+                }
+            ]
+        },
+        "interfaceline" : {
+            "patterns": [
+                {
+                    "name": "entity.name.interface.delphi",
+                    "match": "(\\s+\\w*)(\\s+=\\s+)(?i:(interface|dispinterface))(\\;$)",
+                    "patterns": [
+                            { "include": "#line" }
+                    ]
+                }
+            ]
+        },
+        "recorddefinition" : {
+            "patterns": [
+                {
+                    "name": "entity.record.delphi",
+                    "begin": "(\\s+\\w*)(\\s+=\\s+)(?i:((packed\\s)?(record)))",
+                    "beginCaptures": {
+                                "1": {
+                                    "name": "entity.record.definition.delphi"
+                                },
+                                "3": {
+                                    "name": "entity.name.record.delphi"
+                                }
+                    },
+                    "end": "(?i:(\\s*end)(\\;$))",
+                    "endCaptures": {
+                                "1": {
+                                    "name": "keyword.control.delphi"
+                                }
+                    },
+                    "patterns": [
+                            {
+                                "match": "\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?=(:)|(?=[\\n]))",
+                                "captures": {
+                                    "1": {
+                                        "name": "variable.parameter.function.delphi"
+                                    },
+                                    "2": {
+                                        "name": "punctuation.separator.parameters.delphi"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "paramtype.delphi",
+                                "captures": {
+                                    "2": { "name": "storage.type.delphi" }
+                                },
+                                "match": "(\\:)\\s+\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?=\\;)"
+                            },
+                            { "include": "#case" },
+                            { "include": "#line" }
+                    ]
+                }
+            ]
+        },
+        "enumerated":{
+            "patterns": [
+                {
+                    "name": "entity.enumerated.delphi",
+                    "begin": "(\\s+\\w*)(\\s+=\\s+)(\\()",
+                    "beginCaptures": {
+                                "1": {
+                                    "name": "entity.name.enumerated.delphi"
+                                }
+                    },
+                    "end": "(\\)\\;\\s*$)"
+                }
+            ]
+        },
+        "proceduraltype":{
+            "patterns": [
+                {
+                    "name": "proceduraltype.delphi",
+                    "begin": "(\\s+\\w*)(\\s+=\\s+)(?i:(function|procedure))",
+                    "beginCaptures": {
+                                "1": {
+                                    "name": "proceduraltype.name.delphi"
+                                },
+                                "3": {
+                                    "name": "storage.type.function.delphi"
+                                }
+                    },
+                    "end": "(\\;$)",
+                    "patterns": [
+                        {
+                            "name": "keyword.control.delphi",
+                            "match": "\\b(?i:(of|object))\\b"
+                        },
+                        {
+                            "name": "return.delphi",
+                            "begin": "(?=\\:\\s)",
+                            "beginCaptures": {
+                                "1": {
+                                    "name": "punctuation.definition.return.begin.delphi"
+                                }
+                            },
+                            "contentName": "return.type.delphi",
+                            "end": "(?=\\;)",
+                            "endCaptures": {
+                                "1": {
+                                    "name": "punctuation.definition.return.end.delphi"
+                                }
+                            },
                             "patterns": [
                                 {
-                                    "include": "#entity_name_function"
+                                    "name": "keyword.control.delphi",
+                                    "match": "\\b(?i:(of|object))\\b"
                                 }
                             ]
                         },
@@ -71,143 +719,313 @@
                                     "name": "punctuation.definition.parameters.begin.delphi"
                                 }
                             },
-                            "contentName": "meta.function.parameters.delphi",
-                            "end": "(?=\\)|\\;\\s*(?:\\;|-\\>))",
+                            "contentName": "meta.procedural.parameters.delphi",
+                            "end": "(?=\\)|\\;\\s*(?:\\;))",
                             "patterns": [
                                 {
+                                    "name": "procedural.paramtype.delphi",
+                                    "captures": {
+                                        "2": { "name": "procedural.paramtype.type.delphi" }
+                                    },
+                                    "match": "\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?=\\;|\\)|\\s*\\=)"
+                                },
+                                {
+                                    "match": "\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(:|,)|(?=[\\n]))",
                                     "captures": {
                                         "1": {
-                                            "name": "variable.parameter.function.delphi"
+                                            "name": "variable.parameter.procedural.delphi"
                                         },
                                         "2": {
                                             "name": "punctuation.separator.parameters.delphi"
                                         }
-                                    },
-                                    "match": "\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(:|,)|(?=[\\n]))"
-                                }
-                            ]
-                        },
-                        {
-                            "begin": "(\\:)\\s*(\\->)",
-                            "beginCaptures": {
-                                "1": {
-                                    "name": "punctuation.definition.parameters.end.delphi"
+                                    }
                                 },
-                                "2": {
-                                    "name": "punctuation.separator.annotation.result.delphi"
-                                }
-                            },
-                            "end": "(\\;)",
-                            "patterns": [
-                                {
-                                    "include": "$self"
-                                }
+                                { "include": "#line" }
                             ]
                         }
                     ]
-                },
-                {
-                    "begin": "^\\s*(property|function|Function|procedure|Procedure|program|constructor|destructor)\\s+(?=[A-Za-z_][A-Za-z0-9_]*)",
-                    "beginCaptures": {
-                        "1": {
-                            "name": "storage.type.function.delphi"
-                        }
-                    },
-                    "end": "(\\()|\\;|\\:\\s*",
-                    "endCaptures": {
-                        "1": {
-                            "name": "punctuation.definition.parameters.begin.delphi"
-                        },
-                        "2": {
-                            "name": "invalid.illegal.missing-parameters.delphi"
-                        }
-                    },
-                    "name": "meta.function.delphi",
-                    "patterns": [
-                        {
-                            "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
-                            "contentName": "entity.name.function.delphi",
-                            "end": "(?![A-Za-z0-9_])",
-                            "patterns": [
-                                {
-                                    "include": "#entity_name_function"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "name": "string.quoted.single.delphi",
-                    "match": "#(\\d{1,2}|.)"
-                },
+                }
+            ]
+        },
+        "numeric": {
+            "patterns": [
                 {
                     "name": "constant.numeric.delphi",
                     "match": "(?<![\\d.])\\s0x[a-fA-F\\d]+|\\b\\d+(\\.\\d+)?([eE]-?\\d+)?|\\.\\d+([eE]-?\\d+)?"
-                },
-                {
-                    "name": "constant.language.delphi",
-                    "match": "\\b(?i:(@|nil|true|True|false|False))\\b"
-                },
-                {
-                    "name": "string.quoted.single.delphi",
-                    "begin": "'",
-                    "beginCaptures": {
-                        "0": {
-                            "name": "punctuation.definition.string.begin.delphi"
-                        }
-                    },
-                    "end": "'",
-                    "endCaptures": {
-                        "0": {
-                            "name": "punctuation.definition.string.end.delphi"
-                        }
-                    }
-                },
-                {
-                    "name": "string.quoted.block.delphi",
-                    "begin": "\\[(=*)\\[",
-                    "beginCaptures": {
-                        "0": {
-                            "name": "punctuation.definition.string.begin.delphi"
-                        }
-                    },
-                    "end": "\\]\\1\\]",
-                    "endCaptures": {
-                        "0": {
-                            "name": "punctuation.definition.string.end.delphi"
-                        }
-                    }
-                },
-                {
-                    "name": "meta.arrayindex.delphi",
-                    "begin": "\\[",
-                    "end": "\\]",
-                    "patterns": [
-                        {
-                            "include": "#general"
-                        }
-                    ]
-                },
-                {
-                    "name": "keyword.operator.delphi",
-                    "match": "(\\b(and|or|not)\\b)"
-                },
+                }
+            ]
+        },
+        "modifier": {
+            "patterns": [
                 {
                     "name": "keyword.control.delphi",
-                    "match": "\\b(?i:(exports|e?|(message?)|library|set|array|file|mod|shl|as|shr|asm|for|begin|object|then|case|goto|of|to|class|if|on|try|const|implementation|type|constructor|in|packed|unit|destructor|inherited|until|div|initialization|program|uses|do|inline|property|var|downto|interface|raise|while|else|is|record|with|end|label|repeat|xor|except|absolute|export|published|abstract|external|near|read|assembler|far|nodefault|resident|at|forward|override|stored|cdecl|index|private|virtual|default|interrupt|protected|write|dynamic|public|ab|length|ord|size|of|chr|lo|pred|succ|hi|low|ptr|swap|high|odd|round|trunc|threadvar|overload|out|finalization|finally|break|return|local|final|unsafe|resourcestring|sealed|dispinterface|static|platform|requires|safecall|automated|stdcall|contains|implements|varargs|readonly|deprecated|package|register|dispid|pascal|reintroduce|writeonly))\\b"
-
-                },
+                    "match": "\\b(?i:(const|var|threadvar|varargs))\\b"
+                }            
+            ]
+        },
+        "paramodifer":{
+            "patterns": [
                 {
-                    "name": "variable.other.delphi",
-                    "match": "([A-Za-z_][A-Za-z0-9_\\.]*)"
+                    "name": "keyword.control.delphi",
+                    "match": "\\b(?i:(const|var|out))\\b"
+                }            
+            ]
+        },
+        "reservedwords":{
+            "patterns": [
+                {
+                    "name": "keyword.control.delphi",
+                    "match": "\\b(?i:(exports|e?|(message?)|set of|array|file|as|for|object|goto|to|if|then|on|const|type|in|packed|inherited|until|uses|do|inline|downto|raise|while|else|is|with|label|repeat|absolute|export|abstract|external|near|read|assembler|far|nodefault|resident|at|forward|override|stored|cdecl|index|virtual|default|interrupt|write|dynamic|ab|length|size|ptr|swap|overload|break|return|local|final|unsafe|resourcestring|sealed|static|platform|requires|safecall|automated|stdcall|contains|implements|readonly|deprecated|package|register|dispid|pascal|reintroduce|writeonly|chr))\\b",
+                    "patterns": [
+                        { "include": "#calcwords" }
+                    ]
                 }
+            ]
+        },
+        "calcwords":{
+            "patterns": [
+                {  
+                    "name": "keyword.control.delphi",
+                    "match": "\\b(?i:(mod|shl|shr|div|ord|hi|high|lo|low|odd|pred|succ|round|trunc))\\b"
+                }
+            ]
+        },
+        "operators": {
+            "patterns": [
+                {
+                    "name": "keyword.operator.delphi",
+                    "match": "(\\b(?i:(and|or|not|xor))\\b)"
+                }
+            ]
+        },
+        "dfm": {
+            "patterns": [
+                {
+                    "name": "keyword.control.delphi",
+                    "match": "\\b(?i:(item|end))\\b",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control.delphi"
+                        }
+                    }
+                }
+            ]
+        },
+        "line":{
+            "patterns": [
+                { 
+                    "patterns": [
+                        { "include": "#calledmethod" },
+                        { "include": "#pointer" },
+                        { "include": "#pointertype" },
+                        { "include": "#comment" },
+                        { "include": "#numeric" },
+                        { "include": "#operators" },
+                        { "include": "#string" },
+                        { "include": "#reservedwords" },
+                        { "include": "#modifier" },
+                        { "include": "#constant" }
+                    ]
+                }
+            ]
+        },
+        "constant": {
+            "patterns": [
+                {
+                    "name": "constant.language.delphi",
+                    "match": "\\b(?i:(@|nil|true|false))\\b"
+                }
+            ]
+        },
+        "calledmethod": {
+            "patterns": [
+                {
+                    "name": "calledmethod.delphi",
+                    "match": "(?:\\.)([A-Za-z_][A-Za-z0-9_]*(?=(\\(|\\;)))"
+                }
+            ]
+        },
+        "pointertype": {
+            "patterns": [
+                {
+                    "name": "type.pointer.delphi",
+                    "match": "(?:\\^)([A-Za-z_][A-Za-z0-9_]*)"
+                }
+            ]
+        },
+        "pointer": {
+            "patterns": [
+                {
+                    "name": "keyword.other.pointer.delphi",
+                    "match": "([A-Za-z_][A-Za-z0-9_]*)(?:\\^)"
+                }
+            ]
+        },
+        "program":{
+            "contentName": "program.delphi",
+            "begin": "(?i:\\bprogram\\b)",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.control.begin.delphi"
+                }
+            },
+            "end": "(?i:((?m)^end)(\\.$))",
+            "endCaptures": {
+                "1": {
+                    "name": "keyword.control.end.delphi"
+                }
+            },
+            "patterns": [
+                { "include": "#methoddefinition" },
+                {
+                    "contentName": "program.block.delphi",
+                    "begin": "(?i:^\\bbegin\\b)",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "keyword.control.begin.delphi"
+                        }
+                    },
+                    "end": "(?i:(?=(((?m)^end)(?=\\.$))))",
+                    "endCaptures": {
+                        "1": {
+                            "name": "keyword.control.end.delphi"
+                        }
+                    },
+                    "patterns": [
+                        { "include": "#line" }
+                    ]
+                },
+                { "include": "#recorddefinition" },
+                { "include": "#classdefinitionline" },
+                { "include": "#classdefinition" },
+                { "include": "#enumerated" },
+                { "include": "#proceduraltype" },
+                { "include": "#uses" },
+                { "include": "#line" }
+            ]
+        },
+        "library":{
+            "contentName": "program.delphi",
+            "begin": "(?i:\\blibrary\\b)",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.control.begin.delphi"
+                }
+            },
+            "end": "(?i:((?m)^end)(\\.$))",
+            "endCaptures": {
+                "1": {
+                    "name": "keyword.control.end.delphi"
+                }
+            },
+            "patterns": [
+                { "include": "#methoddefinition" },
+                {
+                    "contentName": "program.block.delphi",
+                    "begin": "(?i:^\\bbegin\\b)",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "keyword.control.begin.delphi"
+                        }
+                    },
+                    "end": "(?i:(?=(((?m)^end)(?=\\.$))))",
+                    "endCaptures": {
+                        "1": {
+                            "name": "keyword.control.end.delphi"
+                        }
+                    },
+                    "patterns": [
+                        { "include": "#line" }
+                    ]
+                },
+                { "include": "#recorddefinition" },
+                { "include": "#classdefinitionline" },
+                { "include": "#classdefinition" },
+                { "include": "#enumerated" },
+                { "include": "#proceduraltype" },
+                { "include": "#uses" },
+                { "include": "#line" }
+            ]
+        },
+        "unit":{
+            "contentName": "unit.block.delphi",
+            "begin": "\\b(?i:unit)\\b",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.control.begin.delphi"
+                }
+            },
+            "end": "(?i:((?m)^end))(\\.$)",
+            "endCaptures": {
+                "1": {
+                    "name": "keyword.control.end.delphi"
+                }
+            },
+            "patterns": [
+                { "include": "#domain" },
+                { "include": "#methoddefinition" },
+                { "include": "#line" }
+            ]
+        },
+        "uses":{
+            "contentName": "uses.block.delphi",
+            "begin": "\\b(?i:uses)\\b",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.control.begin.delphi"
+                }
+            },
+            "end": "(?=\\;\\s*$)",
+            "patterns": [
+                {
+                    "match": "\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?=(,|;)|(?=[\\n]))",
+                    "captures": {
+                        "1": {
+                            "name": "unit.delphi"
+                        },
+                        "2": {
+                            "name": "punctuation.separator.uses.delphi"
+                        }
+                    }
+                },                
+                { "include": "#comment" }
+            ]
+        },
+        "type":{
+            "contentName": "type.block.delphi",
+            "begin": "\\b(?i:type)\\b",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.control.begin.delphi"
+                }
+            },
+            "end": "(?i:(?=implementation|type|uses|const|var))\\b",
+            "endCaptures": {
+                "1": {
+                    "name": "keyword.control.end.delphi"
+                }
+            },
+            "patterns": [
+                { "include": "#methoddeclaration" },
+                { "include": "#recorddefinition" },
+                { "include": "#classdefinitionline" },
+                { "include": "#classdefinition" },
+                { "include": "#enumerated" },
+                { "include": "#proceduraltype" },
+                { "include": "#interfaceline" },
+                { "include": "#interface" },
+                { "include": "#line" }
+            ]
+        },
+        "general": {
+            "patterns": [
+                { "include": "#program" },
+                { "include": "#unit" },
+                { "include": "#library" },
+                { "include": "#dfm" },
+                { "include": "#line" }
             ]
         }
     },
-    "patterns": [
-        {
-            "include": "#general"
-        }
-    ],
     "uuid": "38ec920b-4e04-4fc1-b21b-dd9b6a543647"
 }
