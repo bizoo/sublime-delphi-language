@@ -10,9 +10,17 @@
 
 (called method_name)
 
-# Install #
+## Installation
+The recommended method of installation is via [Package Control](https://packagecontrol.io/). It will download upgrades to your packages automatically. -->
 
-  If you don´t have package control you can run this command to clone the plugin:
+### Package Control
+
+* Follow instructions on [https://packagecontrol.io/installation](https://packagecontrol.io/installation)
+* Install using Package Control: Install > Delphi Syntax Highlighting
+
+### Using Git
+
+Go to your Sublime Text Packages directory and clone the repository using the command below:
 
 	git clone: git@bitbucket.org:JeisonJHA/sublime-delphi-language.git
 
