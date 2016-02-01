@@ -12,7 +12,7 @@
 		<integer>1</integer>
 		<key>symbolIndexTransformation</key>
 		<string>
-		   s/\(((\s*)[A-Za-z_][A-Za-z0-9_]*)(.\s*([A-Za-z_][A-Za-z0-9_]*))?(\s*)\)/\(descendants $1\)/g;
+		   s/([A-Za-z_][A-Za-z0-9_]*(\,\s*[A-Za-z_][A-Za-z0-9_]*)?(\,\s*[A-Za-z_][A-Za-z0-9_]*)?)/\(descendants $1\)/g;
 		</string>
 	</dict>
 	<key>uuid</key>
