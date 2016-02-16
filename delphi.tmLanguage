@@ -349,7 +349,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(//).*$\n?</string>
+					<string>(//).*$</string>
 					<key>name</key>
 					<string>comment.line.double-slash.delphi</string>
 				</dict>
@@ -471,6 +471,10 @@
 						<dict>
 							<key>include</key>
 							<string>#uses</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#methoddeclaration</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -1005,7 +1009,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(?=^\s*(?i:(class procedure|class function|function|procedure|constructor|destructor))\s+(?=[A-Za-z_][A-Za-z0-9_]*))</string>
+					<string>(?=^\s*(?i:(class procedure|class function|function|procedure|constructor|destructor))\s+([A-Za-z_][A-Za-z0-9_]*))</string>
 					<key>end</key>
 					<string>(^end)(\;)</string>
 					<key>endCaptures</key>
@@ -1317,6 +1321,14 @@
 						<dict>
 							<key>include</key>
 							<string>#line</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#tryfinalyexceptblock</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#block</string>
 						</dict>
 					</array>
 				</dict>
@@ -1726,6 +1738,10 @@
 				<dict>
 					<key>include</key>
 					<string>#comment</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#string</string>
 				</dict>
 			</array>
 		</dict>

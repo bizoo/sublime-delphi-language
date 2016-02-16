@@ -116,6 +116,7 @@
                     "patterns": [
                         { "include": "#type" },
                         { "include": "#uses" },
+                        { "include": "#methoddeclaration" },
                         { "include": "#line" }
                     ]
                 },
@@ -186,7 +187,7 @@
             "patterns": [
                 {
                     "name": "comment.line.double-slash.delphi",
-                    "match": "(//).*$\\n?",
+                    "match": "(//).*$",
                     "captures": {
                         "1": {
                             "name": "punctuation.definition.comment.delphi"
@@ -422,7 +423,7 @@
             "patterns": [
                 {
                     "name": "function.implementation.delphi",
-                    "begin": "(?=^\\s*(?i:(class procedure|class function|function|procedure|constructor|destructor))\\s+(?=[A-Za-z_][A-Za-z0-9_]*))",
+                    "begin": "(?=^\\s*(?i:(class procedure|class function|function|procedure|constructor|destructor))\\s+([A-Za-z_][A-Za-z0-9_]*))",
                     "end": "(^end)(\\;)",
                     "endCaptures": {
                         "1": {
@@ -892,7 +893,9 @@
                         }
                     },
                     "patterns": [
-                        { "include": "#line" }
+                        { "include": "#line" },
+                        { "include": "#tryfinalyexceptblock" },
+                        { "include": "#block" }
                     ]
                 },
                 { "include": "#recorddefinition" },
@@ -988,7 +991,8 @@
                         }
                     }
                 },                
-                { "include": "#comment" }
+                { "include": "#comment" },
+                { "include": "#string" }
             ]
         },
         "type":{
